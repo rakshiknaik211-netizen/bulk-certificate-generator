@@ -1,3 +1,5 @@
+import io
+import zipfile
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -9,6 +11,7 @@ from .certificate_generator import generate_certificate
 
 from pathlib import Path
 from fastapi.responses import FileResponse
+from fastapi.responses import StreamingResponse
 
 router = APIRouter(prefix="/api/jobs", tags=["Jobs"])
 
@@ -242,4 +245,78 @@ def download_certificate(
         path=file_path,
         media_type="application/pdf",
         filename=f"certificate_{certificate.id}.pdf"
+    )
+
+
+@router.get("/{job_id}/download-zip")
+def download_certificates_zip(
+    job_id: int,
+    db: Session = Depends(get_db)
+):
+    # Check whether the job exists
+    job = db.get(Job, job_id)
+
+    if job is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Job not found"
+        )
+
+    # Find successful certificates belonging to this job
+    certificates = (
+        db.query(Certificate)
+        .filter(
+            Certificate.job_id == job_id,
+            Certificate.status == "success"
+        )
+        .order_by(Certificate.id)
+        .all()
+    )
+
+    if not certificates:
+        raise HTTPException(
+            status_code=404,
+            detail="No successful certificates found for this job"
+        )
+
+    # Create a ZIP archive in memory
+    zip_buffer = io.BytesIO()
+    added_files = 0
+
+    with zipfile.ZipFile(
+        zip_buffer,
+        mode="w",
+        compression=zipfile.ZIP_DEFLATED
+    ) as zip_file:
+
+        for certificate in certificates:
+            if not certificate.file_path:
+                continue
+
+            file_path = Path(certificate.file_path)
+
+            if not file_path.is_file():
+                continue
+
+            zip_file.write(
+                file_path,
+                arcname=f"certificate_{certificate.id}.pdf"
+            )
+            added_files += 1
+
+    if added_files == 0:
+        raise HTTPException(
+            status_code=404,
+            detail="No certificate PDF files are available"
+        )
+
+    zip_buffer.seek(0)
+
+    return StreamingResponse(
+        zip_buffer,
+        media_type="application/zip",
+        headers={
+            "Content-Disposition":
+                f'attachment; filename="certificates_job_{job_id}.zip"'
+        }
     )

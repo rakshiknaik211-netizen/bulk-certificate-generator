@@ -1,0 +1,452 @@
+
+/* =========================
+   Global styles
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* =========================
+   Header
+========================= */
+
+header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e9f2;
+    padding: 18px max(5%, calc((100% - 1000px) / 2));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: 800;
+    color: #3159cf;
+}
+
+.tag {
+    color: #68738a;
+    font-size: 13px;
+}
+
+/* =========================
+   Main layout
+========================= */
+
+main {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 35px 18px;
+}
+
+.hero {
+    margin-bottom: 26px;
+}
+
+.eyebrow {
+    color: #3159cf;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: clamp(34px, 6vw, 48px);
+    line-height: 1.12;
+    margin: 14px 0;
+}
+
+h1 span {
+    color: #3159cf;
+}
+
+.subtitle,
+.muted,
+.hint {
+    color: #68738a;
+    line-height: 1.6;
+}
+
+/* =========================
+   Panels and headings
+========================= */
+
+.panel {
+    background: #ffffff;
+    padding: 26px;
+    border: 1px solid #e5e9f2;
+    border-radius: 16px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 30px rgba(25, 42, 80, 0.04);
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 21px;
+}
+
+h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* =========================
+   CSV upload
+========================= */
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.upload {
+    min-height: 140px;
+    border: 2px dashed #c9d4ed;
+    background: #f9faff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    text-align: center;
+    padding: 16px;
+}
+
+.upload:hover {
+    border-color: #3159cf;
+    background: #f3f6ff;
+}
+
+.upload-icon {
+    font-size: 28px;
+    color: #3159cf;
+}
+
+.upload span:last-of-type {
+    color: #68738a;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* =========================
+   Divider
+========================= */
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    color: #8992a5;
+    font-size: 11px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    height: 1px;
+    background: #e5e9f2;
+    flex: 1;
+}
+
+/* =========================
+   Recipient input
+========================= */
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    border: 1px solid #d9dfeb;
+    border-radius: 9px;
+    padding: 13px;
+    font: inherit;
+    line-height: 1.6;
+}
+
+textarea:focus {
+    outline: 2px solid #c7d4ff;
+    border-color: #3159cf;
+}
+
+.hint {
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* =========================
+   Recipient count
+========================= */
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f7fb;
+    border-radius: 9px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+/* =========================
+   Generate button
+========================= */
+
+.primary {
+    width: 100%;
+    border: none;
+    border-radius: 9px;
+    background: #3159cf;
+    color: #ffffff;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.primary:hover {
+    background: #2447ad;
+}
+
+.primary:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+#message {
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   Generation summary
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    padding: 16px;
+    background: #f5f7fb;
+    border-radius: 10px;
+}
+
+.stat span {
+    color: #68738a;
+    font-size: 13px;
+}
+
+.stat strong {
+    font-size: 26px;
+}
+
+.success strong {
+    color: #14804a;
+}
+
+.failure strong {
+    color: #c03939;
+}
+
+/* =========================
+   Certificates heading and ZIP
+========================= */
+
+.results-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 28px 0 12px;
+}
+
+.download {
+    display: inline-block;
+    color: #3159cf;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.download:hover {
+    color: #2447ad;
+    text-decoration: underline;
+}
+
+.zip-download {
+    padding: 11px 15px;
+    border: 1px solid #3159cf;
+    border-radius: 8px;
+    background: #f3f6ff;
+}
+
+.zip-download:hover {
+    background: #e8eeff;
+    text-decoration: none;
+}
+
+/* =========================
+   Individual certificate rows
+========================= */
+
+#certificateList {
+    width: 100%;
+}
+
+.certificate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 16px 0;
+    border-bottom: 1px solid #e5e9f2;
+}
+
+.certificate:last-child {
+    border-bottom: 0;
+}
+
+.certificate > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.certificate strong {
+    display: block;
+    margin-bottom: 5px;
+    overflow-wrap: anywhere;
+}
+
+.certificate small {
+    display: block;
+    margin-top: 5px;
+    color: #68738a;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.certificate .download {
+    flex-shrink: 0;
+    text-align: right;
+}
+
+/* =========================
+   Utility classes
+========================= */
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================
+   Footer
+========================= */
+
+footer {
+    text-align: center;
+    color: #8992a5;
+    font-size: 12px;
+    padding: 18px 0;
+}
+
+/* =========================
+   Responsive design
+========================= */
+
+@media (max-width: 520px) {
+    header {
+        padding: 16px 18px;
+    }
+
+    .brand {
+        font-size: 19px;
+    }
+
+    .tag {
+        font-size: 11px;
+        text-align: right;
+    }
+
+    main {
+        padding: 26px 14px;
+    }
+
+    .panel {
+        padding: 18px;
+    }
+
+    .stats {
+        gap: 8px;
+    }
+
+    .stat {
+        padding: 12px 9px;
+    }
+
+    .stat span {
+        font-size: 12px;
+    }
+
+    .stat strong {
+        font-size: 22px;
+    }
+
+    .results-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .certificate {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .certificate .download {
+        text-align: left;
+    }
+}
+
+@media (max-width: 360px) {
+    .tag {
+        max-width: 120px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
